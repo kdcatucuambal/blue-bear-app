@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+
+  <ion-toolbar>
+    <ion-title>
+      My Digimons
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onLogout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<app-loader [isLoading]="loading" ></app-loader>
+
+
+<ion-content role="feed" [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of data.content" size="6" size-md="4" size-lg="3">
+        <ion-card (click)="onShowDetail(item)">
+          <ion-img
+          src="{{item.image}}" style="height: 150px; width: 150px; margin: auto;"
+          alt="{{item.name}}"
+          (ionError)="onHandleImageError($event)"
+          >
+          </ion-img>
+          <p style="text-align: center;"
+          >{{'#' + item.id + ' - ' +  item.name}}</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+
