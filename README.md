@@ -48,3 +48,9 @@ ionic build # Construir la aplicación web
 ionic capacitor add android # Agregar la plataforma Android
 ionic capacitor copy android && cd android && .\gradlew assembleDebug # Generar APK
 ```
+## Consideraciones de la aplicación
+
+- La aplicación valida email y password en el formulario de login.
+- La contraseña debe tener al menos 8 caracteres entre letras minúsculas, mayúsculas, números y caracteres especiales.
+- El email no debe estar registrado en la base de datos.
+- El usuario (nombre y aplicación) son unicós.
