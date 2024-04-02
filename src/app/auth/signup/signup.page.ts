@@ -85,19 +85,21 @@ export class SignupPage {
     this.authService.signup(this.signupRq).subscribe(
       {
         next: (data) => {
-          this.router.navigate(['/auth/verify-code', this.signupRq.authentication.login]).then();
+          const {login} = this.signupRq.authentication;
+          this.resetValues();
+          this.router.navigate(['/auth/verify-code', login]).then();
         },
         error: error => {
           this.presentToast('Error al registrarse').then();
-        },
-        complete: () => {
-          this.signupRq = {} as SignupRq;
-          this.isLoading = false;
+          this.resetValues();
         }
       }
     );
+  }
 
-
+  private resetValues(){
+    this.signupRq = {} as SignupRq;
+    this.isLoading = false;
   }
 
   async presentToast(message: string) {

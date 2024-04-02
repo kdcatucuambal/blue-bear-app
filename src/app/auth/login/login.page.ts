@@ -57,18 +57,22 @@ export class LoginPage  {
         {
           next: (data) => {
             this.authService.setToken(data.authenticationResult.credentials.accessToken);
+            this.resetValues();
             this.router.navigate(['/pages/digimons']).then();
           },
           error: error => {
             this.presentToast('Credenciales incorrectas').then();
-          },
-          complete: () => {
-            this.isLoading = false;
-            this.loginRq = {} as LoginRq;
+            this.resetValues();
           }
         },
       );
 
+  }
+
+  private resetValues(){
+    this.isLoading = false
+    this.loginRq.authentication.password = "";
+    this.loginRq.authentication.login = "";
   }
 
   onGoToSignUp() {

@@ -42,17 +42,20 @@ export class VerifyCodePage implements OnInit {
     this.isLoading = true;
     this.authService.verifyCode(this.verifyCodeRq).subscribe({
       next: (data) => {
+        this.resetValues();
         this.router.navigate(['/auth/login']).then();
       },
       error: (error) => {
         this.presentToast('No se pudo verificar el código').then();
-      },
-      complete: () => {
-        this.isLoading = false;
-        this.verifyCodeRq = {} as VerifyCodeRq;
+        this.resetValues();
       }
     })
 
+  }
+
+  private resetValues() {
+    this.isLoading = false;
+    this.verifyCodeRq = {} as VerifyCodeRq;
   }
 
   async presentToast(message: string) {

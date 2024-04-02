@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginRq, LoginRs, SignupRq, SignUpRs, VerifyCodeRq, VerifyCodeRs} from "../interfaces/auth.interface";
 import {jwtDecode} from 'jwt-decode';
+import {catchError, finalize, of} from "rxjs";
 
 
 @Injectable({
@@ -9,16 +10,17 @@ import {jwtDecode} from 'jwt-decode';
 })
 export class AuthService {
 
-
   private X_API_KEY = 'u2NKYIjc2D8tzdFM1mcp7370NsTRgaPs4W1kpiRw'
   private X_REQUEST_ID = '1050309275'
 
   url = "https://4emedkwtmf.execute-api.us-east-1.amazonaws.com/v1"
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  private getOptions(){
+  private getOptions() {
     return {
       headers: {
         'Content-Type': 'application/json',
@@ -29,27 +31,32 @@ export class AuthService {
   }
 
 
-  login(data: LoginRq){
-    return this.http.post<LoginRs>(`${this.url}/auth/login`, data, this.getOptions())
+  login(data: LoginRq) {
+    return this.http.post<LoginRs>(
+      `${this.url}/auth/login`,
+      data,
+      this.getOptions()
+    );
   }
 
-  signup(data: SignupRq){
+  signup(data: SignupRq) {
     return this.http.post<SignUpRs>(`${this.url}/auth/sign-up`, data, this.getOptions())
   }
 
-  verifyCode(data: VerifyCodeRq){
+  verifyCode(data: VerifyCodeRq) {
     return this.http.post<VerifyCodeRs>(`${this.url}/auth/confirm-sign-up`, data, this.getOptions())
   }
 
 
-  setToken(token: string){
+  setToken(token: string) {
     localStorage.setItem('lb_token', token);
   }
-  getToken(): string | null{
+
+  getToken(): string | null {
     return localStorage.getItem('lb_token');
   }
 
-  closeSession(){
+  closeSession() {
     localStorage.removeItem('lb_token');
   }
 
