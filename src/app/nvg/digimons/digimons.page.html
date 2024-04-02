@@ -17,7 +17,7 @@
 <app-loader [isLoading]="loading" ></app-loader>
 
 
-<ion-content role="feed" [fullscreen]="true">
+<ion-content role="feed" [fullscreen]="true" *ngIf="!loading">
 
   <ion-grid>
     <ion-row>
