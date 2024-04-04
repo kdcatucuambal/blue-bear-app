@@ -4,6 +4,6 @@ export const validateEmail = (email: string): boolean=>{
 }
 
 export const validatePassword = (password: string): boolean=>{
-  const regexPwd  = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  const regexPwd  = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\S]{8,}$/;
   return !!regexPwd.exec(password);
 }

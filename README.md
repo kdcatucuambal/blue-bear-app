@@ -51,6 +51,6 @@ ionic capacitor copy android && cd android && .\gradlew assembleDebug # Generar 
 ## Consideraciones de la aplicación
 
 - La aplicación valida email y password en el formulario de login.
-- La contraseña debe tener al menos 8 caracteres entre letras minúsculas, mayúsculas, números y caracteres especiales.
+- La contraseña debe tener mìnimo 8 caracteres entre nùmeros y letras, opcional caracteres especiales.
 - El email no debe estar registrado en la base de datos.
 - El usuario (nombre y apellido) son unicos.
